@@ -2,6 +2,15 @@ name: Terraform GCP Deployment
 
 on:
   workflow_dispatch:
+   inputs:
+      environment:
+        description: "Select the environment to deploy"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - prod
 
 jobs:
   terraform:
@@ -10,7 +19,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: environments/${{ github.event.inputs.environment }}
+        working-directory: envs/${{ github.event.inputs.environment }}
 
     permissions:
       contents: read
